@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Utils;
+package ir.vasl.magicalpec.utils;
 
 public class PublicValue {
 

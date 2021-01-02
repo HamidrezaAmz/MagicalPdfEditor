@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Utils.Core;
+package ir.vasl.magicalpec.utils.Core;
 
 import android.graphics.PointF;
 
@@ -18,9 +18,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-import ir.vasl.magicalpec.Utils.Exceptions.MagicalException;
-import ir.vasl.magicalpec.Utils.OCGHelper.OCGRemover;
-import ir.vasl.magicalpec.Utils.PublicValue;
+import ir.vasl.magicalpec.utils.Exceptions.MagicalException;
+import ir.vasl.magicalpec.utils.OCGHelper.OCGRemover;
+import ir.vasl.magicalpec.utils.PublicValue;
 
 public class MagicalPdfCore {
 

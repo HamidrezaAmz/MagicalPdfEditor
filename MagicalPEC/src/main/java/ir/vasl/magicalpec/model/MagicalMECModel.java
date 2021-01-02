@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Model;
+package ir.vasl.magicalpec.model;
 
 public class MagicalMECModel {
 

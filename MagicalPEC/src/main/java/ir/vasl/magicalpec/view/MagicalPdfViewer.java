@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.View;
+package ir.vasl.magicalpec.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

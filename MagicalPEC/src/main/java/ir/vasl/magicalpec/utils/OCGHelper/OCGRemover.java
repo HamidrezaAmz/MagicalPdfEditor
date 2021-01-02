@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Utils.OCGHelper;
+package ir.vasl.magicalpec.utils.OCGHelper;
 
 import com.lowagie.text.pdf.PRStream;
 import com.lowagie.text.pdf.PdfArray;

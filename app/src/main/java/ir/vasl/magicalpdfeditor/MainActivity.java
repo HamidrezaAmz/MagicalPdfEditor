@@ -39,8 +39,8 @@ import ir.vasl.magicalpdfeditor.BaseClasses.BaseActivity;
 import ir.vasl.magicalpdfeditor.Utils.Interfaces.GlobalClickCallBack;
 import ir.vasl.magicalpdfeditor.Utils.PublicFunction;
 import ir.vasl.magicalpdfeditor.Utils.PublicValue;
-import ir.vasl.magicalpec.View.MagicalPdfViewer;
-import ir.vasl.magicalpec.ViewModel.MagicalPECViewModel;
+import ir.vasl.magicalpec.view.MagicalPdfViewer;
+import ir.vasl.magicalpec.viewModel.MagicalPECViewModel;
 
 public class MainActivity
         extends BaseActivity

@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Utils.OCGHelper;
+package ir.vasl.magicalpec.utils.OCGHelper;
 
 import com.lowagie.text.ExceptionConverter;
 import com.lowagie.text.pdf.PRStream;

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ir.vasl.magicalpec.View.MagicalPdfViewer
+        <ir.vasl.magicalpec.view.MagicalPdfViewer
             android:id="@+id/magicalPdfViewer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

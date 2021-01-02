@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Utils;
+package ir.vasl.magicalpec.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

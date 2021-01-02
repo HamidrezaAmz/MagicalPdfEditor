@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.Utils.Exceptions;
+package ir.vasl.magicalpec.utils.Exceptions;
 
 public class MagicalException extends Exception {
 

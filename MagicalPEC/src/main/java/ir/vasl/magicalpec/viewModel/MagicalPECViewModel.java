@@ -1,4 +1,4 @@
-package ir.vasl.magicalpec.ViewModel;
+package ir.vasl.magicalpec.viewModel;
 
 import android.app.Application;
 import android.graphics.PointF;
@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import ir.vasl.magicalpec.Utils.Core.MagicalPdfCore;
-import ir.vasl.magicalpec.Utils.Exceptions.MagicalException;
+import ir.vasl.magicalpec.utils.Core.MagicalPdfCore;
+import ir.vasl.magicalpec.utils.Exceptions.MagicalException;
 
 public class MagicalPECViewModel extends AndroidViewModel {
 

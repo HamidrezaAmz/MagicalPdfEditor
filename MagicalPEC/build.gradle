@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.library'
+}
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.HamidrezaAmz'
+
+android {
+
+    compileSdkVersion 29
+    buildToolsVersion '30.0.2'
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName '1.0.1'
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    ndkVersion '21.1.6352462'
+}
+
+dependencies {
+
+    // global
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
+
+    // wizard core
+    api 'com.github.hamidrezaamz:MagicalPdfViewer:1.0.1'
+
+    // pdf editor core
+    implementation 'com.github.librepdf:openpdf:1.3.23'
+    implementation 'com.github.andob:android-awt:1.0.0'
+
+    // live data
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+
+    // test
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

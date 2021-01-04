@@ -122,6 +122,10 @@ public class MagicalPdfCore {
         }
     }
 
+    public boolean addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover) throws MagicalException {
+        return addOCG(context, pointF, uri, currPage, referenceHash, OCGCover);
+    }
+
     public boolean addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) throws MagicalException {
 
         // Hint: OCG -> optional content group
@@ -296,6 +300,21 @@ public class MagicalPdfCore {
 
         // add new OCG
         if (!addOCG(pointF, filePath, currPage, referenceHash, newOCGCover))
+            throw new MagicalException("Cannot add new OCG with target reference");
+
+        // finish method
+        return true;
+
+    }
+
+    public boolean updateOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] newOCGCover) throws MagicalException {
+
+        // remove old OCG
+        if (!removeOCG(context, uri, referenceHash))
+            throw new MagicalException("Cannot remove OCG with target reference");
+
+        // add new OCG
+        if (!addOCG(context, pointF, uri, currPage, referenceHash, newOCGCover))
             throw new MagicalException("Cannot add new OCG with target reference");
 
         // finish method

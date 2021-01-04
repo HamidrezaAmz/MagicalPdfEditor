@@ -113,6 +113,7 @@ public class MagicalPECViewModel extends AndroidViewModel {
     }
 
     public void removeAllOCGs() {
+        // under construction
     }
 
     public void updateOCG(PointF pointF, String filePath, int currPage, String referenceHash, byte[] newOCGCover) {
@@ -124,6 +125,24 @@ public class MagicalPECViewModel extends AndroidViewModel {
                 // Code here will run in UI thread
                 try {
                     MagicalPdfCore.getInstance().updateOCG(pointF, filePath, currPage, referenceHash, newOCGCover);
+                    MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
+                } catch (MagicalException e) {
+                    MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void updateOCG(PointF pointF, Uri uri, int currPage, String referenceHash, byte[] newOCGCover) {
+        MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.PROCESSING);
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                // Code here will run in UI thread
+                try {
+                    MagicalPdfCore.getInstance().updateOCG(getApplication(), pointF, uri, currPage, referenceHash, newOCGCover);
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
                 } catch (MagicalException e) {
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);

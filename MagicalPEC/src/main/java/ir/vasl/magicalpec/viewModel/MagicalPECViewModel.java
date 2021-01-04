@@ -1,7 +1,6 @@
 package ir.vasl.magicalpec.viewModel;
 
 import android.app.Application;
-import android.content.Context;
 import android.graphics.PointF;
 import android.net.Uri;
 import android.os.Handler;
@@ -33,8 +32,8 @@ public class MagicalPECViewModel extends AndroidViewModel {
         addOCG(pointF, filePath, currPage, referenceHash, OCGCover, 0, 0);
     }
 
-    public void addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover) {
-        addOCG(context, pointF, uri, currPage, referenceHash, OCGCover, 0, 0);
+    public void addOCG(PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover) {
+        addOCG(pointF, uri, currPage, referenceHash, OCGCover, 0, 0);
     }
 
     public void addOCG(PointF pointF, String filePath, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) {
@@ -56,7 +55,7 @@ public class MagicalPECViewModel extends AndroidViewModel {
         });
     }
 
-    public void addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) {
+    public void addOCG(PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) {
 
         MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.PROCESSING);
 
@@ -65,7 +64,7 @@ public class MagicalPECViewModel extends AndroidViewModel {
             public void run() {
                 // Code here will run in UI thread
                 try {
-                    MagicalPdfCore.getInstance().addOCG(context, pointF, uri, currPage, referenceHash, OCGCover, OCGWidth, OCGHeight);
+                    MagicalPdfCore.getInstance().addOCG(getApplication(), pointF, uri, currPage, referenceHash, OCGCover, OCGWidth, OCGHeight);
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
                 } catch (MagicalException e) {
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);
@@ -103,7 +102,7 @@ public class MagicalPECViewModel extends AndroidViewModel {
             public void run() {
                 // Code here will run in UI thread
                 try {
-                    MagicalPdfCore.getInstance().removeOCG(uri, referenceHash);
+                    MagicalPdfCore.getInstance().removeOCG(getApplication(), uri, referenceHash);
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
                 } catch (MagicalException e) {
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);

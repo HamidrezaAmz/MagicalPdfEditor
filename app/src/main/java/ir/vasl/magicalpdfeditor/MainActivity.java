@@ -267,8 +267,7 @@ public class MainActivity
 
     private void addAnnotation(PointF pointF, String referenceHash, byte[] OCGCover) {
 
-        magicalPECViewModel.addOCG(MainActivity.this,
-                pointF,
+        magicalPECViewModel.addOCG(pointF,
                 currUri,
                 magicalPdfViewer.getCurrentPage(),
                 referenceHash,

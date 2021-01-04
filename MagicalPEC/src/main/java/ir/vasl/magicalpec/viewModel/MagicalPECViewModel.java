@@ -1,7 +1,9 @@
 package ir.vasl.magicalpec.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.PointF;
+import android.net.Uri;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,10 @@ public class MagicalPECViewModel extends AndroidViewModel {
         addOCG(pointF, filePath, currPage, referenceHash, OCGCover, 0, 0);
     }
 
+    public void addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover) {
+        addOCG(context, pointF, uri, currPage, referenceHash, OCGCover, 0, 0);
+    }
+
     public void addOCG(PointF pointF, String filePath, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) {
 
         MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.PROCESSING);
@@ -50,6 +56,25 @@ public class MagicalPECViewModel extends AndroidViewModel {
         });
     }
 
+    public void addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) {
+
+        MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.PROCESSING);
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                // Code here will run in UI thread
+                try {
+                    MagicalPdfCore.getInstance().addOCG(context, pointF, uri, currPage, referenceHash, OCGCover, OCGWidth, OCGHeight);
+                    MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
+                } catch (MagicalException e) {
+                    MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     public void removeOCG(String filePath, String referenceHash) {
 
         MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.PROCESSING);
@@ -60,6 +85,25 @@ public class MagicalPECViewModel extends AndroidViewModel {
                 // Code here will run in UI thread
                 try {
                     MagicalPdfCore.getInstance().removeOCG(filePath, referenceHash);
+                    MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
+                } catch (MagicalException e) {
+                    MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void removeOCG(Uri uri, String referenceHash) {
+
+        MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.PROCESSING);
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                // Code here will run in UI thread
+                try {
+                    MagicalPdfCore.getInstance().removeOCG(uri, referenceHash);
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.SUCCESS);
                 } catch (MagicalException e) {
                     MagicalPECViewModel.this.pecCoreStatus.postValue(PECCoreStatusEnum.FAILED);

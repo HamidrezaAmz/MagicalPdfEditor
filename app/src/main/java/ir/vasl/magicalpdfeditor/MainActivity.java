@@ -27,7 +27,6 @@ import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.github.barteksc.pdfviewer.listener.OnTapListener;
 import com.github.barteksc.pdfviewer.model.LinkTapEvent;
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle;
-import com.github.barteksc.pdfviewer.util.UriUtils;
 
 import org.benjinus.pdfium.Bookmark;
 import org.benjinus.pdfium.Meta;
@@ -36,6 +35,7 @@ import java.util.List;
 import java.util.UUID;
 
 import ir.vasl.magicalpdfeditor.BaseClasses.BaseActivity;
+import ir.vasl.magicalpdfeditor.Utils.FileUtils;
 import ir.vasl.magicalpdfeditor.Utils.Interfaces.GlobalClickCallBack;
 import ir.vasl.magicalpdfeditor.Utils.PublicFunction;
 import ir.vasl.magicalpdfeditor.Utils.PublicValue;
@@ -82,7 +82,6 @@ public class MainActivity
                 launchFilePicker();
             }
         });
-
     }
 
     private void initViewModel() {
@@ -140,7 +139,7 @@ public class MainActivity
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PublicValue.KEY_REQUEST_FILE_PICKER) {
-            if (data.getData() != null) {
+            if (data != null && data.getData() != null) {
                 this.currUri = data.getData();
                 displayFileFromUri();
             }
@@ -152,7 +151,17 @@ public class MainActivity
         if (currUri == null)
             return;
 
-        this.currFilePath = UriUtils.getPathFromUri(MainActivity.this, currUri);
+        // this is OK
+        // /storage/emulated/0/Download/PDF_ENGLISH.pdf
+        // this.currFilePath = UriUtils.getPathFromUri(MainActivity.this, currUri);
+
+        // this is not OK
+        // /data/user/0/ir.vasl.magicalpdfeditor/files/PDF_ENGLISH.pdf
+        // this.currFilePath = PublicFunction.getFilePathForN(MainActivity.this, currUri);
+
+        // this is working
+        // /storage/emulated/0/Download/PDF_ENGLISH.pdf
+        this.currFilePath = FileUtils.newInstance(MainActivity.this).getPath(currUri);
         this.currFileName = PublicFunction.getFileName(MainActivity.this, currUri);
         this.toolbar.setSubtitle("File Name: " + currFileName);
 
@@ -258,8 +267,9 @@ public class MainActivity
 
     private void addAnnotation(PointF pointF, String referenceHash, byte[] OCGCover) {
 
-        magicalPECViewModel.addOCG(pointF,
-                currFilePath,
+        magicalPECViewModel.addOCG(MainActivity.this,
+                pointF,
+                currUri,
                 magicalPdfViewer.getCurrentPage(),
                 referenceHash,
                 OCGCover);

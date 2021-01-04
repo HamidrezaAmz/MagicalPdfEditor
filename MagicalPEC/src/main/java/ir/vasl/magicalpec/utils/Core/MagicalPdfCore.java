@@ -1,6 +1,8 @@
 package ir.vasl.magicalpec.utils.Core;
 
+import android.content.Context;
 import android.graphics.PointF;
+import android.net.Uri;
 
 import com.lowagie.text.Annotation;
 import com.lowagie.text.Image;
@@ -120,6 +122,89 @@ public class MagicalPdfCore {
         }
     }
 
+    public boolean addOCG(Context context, PointF pointF, Uri uri, int currPage, String referenceHash, byte[] OCGCover, float OCGWidth, float OCGHeight) throws MagicalException {
+
+        // Hint: OCG -> optional content group
+        // Hint: Page Starts From --> 1 In OpenPdf Core
+        currPage++;
+
+        // OCG width & height
+        if (OCGWidth == 0 || OCGHeight == 0) {
+            OCGWidth = PublicValue.DEFAULT_OCG_WIDTH;
+            OCGHeight = PublicValue.DEFAULT_OCG_HEIGHT;
+        }
+
+        // Check file input
+        if (uri == null || uri.getPath() == null)
+            throw new MagicalException("Input file is not valid");
+
+        try {
+
+            // inout stream from file
+            // InputStream inputStream = new FileInputStream(uri);
+            InputStream inputStream = context.getContentResolver().openInputStream(uri);
+
+            // we create a reader for a certain document
+            PdfReader reader = new PdfReader(inputStream);
+
+            // create output stream from uri
+            FileOutputStream fileOutputStream = (FileOutputStream) context.getContentResolver().openOutputStream(uri);
+
+            // we create a stamper that will copy the document to a new file
+            PdfStamper stamp = new PdfStamper(reader, fileOutputStream);
+
+            // get watermark icon
+            Image img = Image.getInstance(OCGCover);
+            img.setAnnotation(new Annotation(0, 0, 0, 0, referenceHash));
+            img.scaleAbsolute(OCGWidth, OCGHeight);
+            img.setAbsolutePosition(pointF.x, pointF.y);
+            PdfImage stream = new PdfImage(img, referenceHash, null);
+            stream.put(new PdfName(PublicValue.KEY_SPECIAL_ID), new PdfName(referenceHash));
+            PdfIndirectObject ref = stamp.getWriter().addToBody(stream);
+            img.setDirectReference(ref.getIndirectReference());
+
+            // add as layer
+            PdfLayer wmLayer = new PdfLayer(referenceHash, stamp.getWriter());
+
+            // prepare transparency
+            PdfGState transparent = new PdfGState();
+            transparent.setAlphaIsShape(false);
+
+            // get page file number count
+            if (reader.getNumberOfPages() < currPage) {
+                stamp.close();
+                reader.close();
+                throw new MagicalException("Page index is out of pdf file page numbers");
+            }
+
+            // add annotation into target page
+            PdfContentByte over = stamp.getOverContent(currPage);
+            if (over == null) {
+                stamp.close();
+                reader.close();
+                throw new MagicalException("GetUnderContent() is null");
+            }
+
+            // add as layer
+            over.beginLayer(wmLayer);
+            over.setGState(transparent); // set block transparency properties
+            over.addImage(img);
+            over.endLayer();
+
+            // closing PdfStamper will generate the new PDF file
+            stamp.close();
+
+            // close reader
+            reader.close();
+
+            // finish method
+            return true;
+
+        } catch (Exception e) {
+            throw new MagicalException(e.getMessage());
+        }
+    }
+
     public boolean removeOCG(String filePath, String annotationHash) throws MagicalException {
 
         // get file and FileOutputStream
@@ -141,6 +226,45 @@ public class MagicalPdfCore {
 
             // we create a stamper that will copy the document to a new file
             PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream(file));
+
+            // remove target object
+            OCGRemover ocgRemover = new OCGRemover();
+            ocgRemover.removeLayers(pdfReader, annotationHash);
+
+            // closing PdfStamper will generate the new PDF file
+            pdfStamper.close();
+
+            // close reader
+            pdfReader.close();
+
+            // finish method
+            return true;
+
+        } catch (Exception e) {
+            throw new MagicalException(e.getMessage());
+        }
+    }
+
+    public boolean removeOCG(Context context, Uri uri, String annotationHash) throws MagicalException {
+
+        // Check file input
+        if (uri == null || uri.getPath() == null)
+            throw new MagicalException("Input file is not valid");
+
+        try {
+
+            // inout stream from file
+            // InputStream inputStream = new FileInputStream(file);
+            InputStream inputStream = context.getContentResolver().openInputStream(uri);
+
+            // we create a reader for a certain document
+            PdfReader pdfReader = new PdfReader(inputStream);
+
+            // create output stream from uri
+            FileOutputStream fileOutputStream = (FileOutputStream) context.getContentResolver().openOutputStream(uri);
+
+            // we create a stamper that will copy the document to a new file
+            PdfStamper pdfStamper = new PdfStamper(pdfReader, fileOutputStream);
 
             // remove target object
             OCGRemover ocgRemover = new OCGRemover();

@@ -21,7 +21,7 @@ As there is not much open source easy working PDF editors and PDF wizards, I dec
 # Usage
 Just clone the project and trance the source code, It's realy easy and clear. Here an example how to use this lib.
 
-Step 1. Add the JitPack repository to your build file,
+**Step** 1. Add the JitPack repository to your build file,
 Add it in your root build.gradle at the end of repositories:
 
 ```gradle
@@ -32,7 +32,7 @@ allprojects {
     }
 ```
 
-Step 2. Add the dependency
+**Step 2.** Add the dependency
 
 ```gradle
 dependencies {
@@ -40,7 +40,7 @@ dependencies {
 }
 ```
 
-Step 3. Add PDFViewer into your xml
+**Step 3.** Add PDFViewer into your xml
 ```xml
 <ir.vasl.magicalpec.view.MagicalPdfViewer
             android:id="@+id/magicalPdfViewer"

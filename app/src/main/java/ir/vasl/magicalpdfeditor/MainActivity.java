@@ -151,6 +151,8 @@ public class MainActivity
         if (currUri == null)
             return;
 
+        // TODO: 1/17/21  DON NOT FORGET TO USE YOUR FILE HANDLING SCENARIO FOR NEW ANDROID APIs
+
         // this is OK
         // /storage/emulated/0/Download/PDF_ENGLISH.pdf
         // this.currFilePath = UriUtils.getPathFromUri(MainActivity.this, currUri);
@@ -272,6 +274,7 @@ public class MainActivity
                 magicalPdfViewer.getCurrentPage(),
                 referenceHash,
                 OCGCover);
+
     }
 
     private void deleteAnnotation(String referenceHash) {

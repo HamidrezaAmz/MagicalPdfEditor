@@ -5,5 +5,5 @@ public class MagicalException extends Exception {
     public MagicalException(String errorMessage) {
         super(errorMessage);
     }
-    
+
 }

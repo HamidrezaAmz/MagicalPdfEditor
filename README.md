@@ -19,7 +19,7 @@ As there is not much open source easy working PDF editors and PDF wizards, I dec
 * [ ] Maybe some other features :stuck_out_tongue_winking_eye:
 
 # Usage
-Just close the project and trance the source code, It's realy easy and clear. Here an example on using this lib.
+Just clone the project and trance the source code, It's realy easy and clear. Here an example on using this lib.
 
 Step 1. Add the JitPack repository to your build file,
 Add it in your root build.gradle at the end of repositories:

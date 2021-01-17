@@ -1,3 +1,4 @@
+[![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![](https://jitpack.io/v/HamidrezaAmz/MagicalPdfEditor.svg)](https://jitpack.io/#HamidrezaAmz/MagicalPdfEditor)
 
 # MagicalPdfEditor
@@ -16,3 +17,27 @@ As there is not much open source easy working PDF editors and PDF wizards, I dec
 * [ ] Highlight text in pdf
 * [ ] Remove page from pdf file
 * [ ] Maybe some other features :stuck_out_tongue_winking_eye:
+
+# Usage
+Just close the project and trance the source code, It's realy easy and clear. Here an example on using this lib.
+
+Step 1. Add the JitPack repository to your build file,
+Add it in your root build.gradle at the end of repositories:
+
+```gradle
+allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
+```
+
+Step 2. Add the dependency
+
+```gradle
+dependencies {
+    implementation 'com.github.HamidrezaAmz:MagicalPdfEditor:LAST_VERSION'
+}
+```
+
+

@@ -49,6 +49,8 @@ dependencies {
             android:background="#009688" />
 ```
 
+For more examples and sample code please check [this class](https://github.com/HamidrezaAmz/MagicalPdfEditor/blob/master/app/src/main/java/ir/vasl/magicalpdfeditor/MainActivity.java) from sample app.
+
 # Interfaces
 Here is the list of interfaces that can help you work with this lib.
 

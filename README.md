@@ -65,5 +65,5 @@ Here is the list of interfaces that can help you work with this lib.
 
 
 # Attention
-Working with files is **restricted** in higher android api levels, So if you are working with high level android APIs, be aware of using file provides and needed permissions to work with files, Or you can use [SimpleStorage](https://github.com/anggrayudi/SimpleStorage) Lib to work with files and Android storage. 
+Working with files is **restricted** in higher android api levels, So if you are working with high level android APIs, be aware of using file provides and needed permissions to work with files, Or you can use [SimpleStorage](https://github.com/anggrayudi/SimpleStorage) lib to work with files and Android storage. 
 

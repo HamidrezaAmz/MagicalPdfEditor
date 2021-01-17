@@ -57,9 +57,9 @@ Here is the list of interfaces that can help you work with this lib.
 | OnPageErrorListener | Triggered when sth went wrong on loading the pdf file |
 | OnLoadCompleteListener | Triggered when loading pdf file finished |
 | OnPageChangeListener | Triggered when page status changed, this will give you page count an new page index |
-| OnLongPressListener | Triggered when user hold his/her finger on part of pdf screen, this will give you `MotionEvent` |
-| OnTapListener | --- | 
-| LinkHandler | --- |
+| OnLongPressListener | Triggered when user hold his/her finger on part of pdf screen, this will give you `MotionEvent` object |
+| OnTapListener | Triggered when user on tap on PDF screen, this will give you `MotionEvent` object | 
+| LinkHandler | Triggered when user clicked on added annotation with link, this will give you `LinkTapEvent` you can extract stored data |
 
 
 

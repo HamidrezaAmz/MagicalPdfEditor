@@ -49,5 +49,18 @@ dependencies {
             android:background="#009688" />
 ```
 
-            
+# Interfaces
+Here is the list of interfaces that can help you work with this lib.
+
+| Interface | Description |
+| --- | --- |
+| OnPageErrorListener | Triggered when sth went wrong on loading the pdf file |
+| OnLoadCompleteListener | --- |
+| OnPageChangeListener | --- |
+| OnLongPressListener | --- |
+| OnTapListener | --- | 
+| LinkHandler | --- |
+
+
+
 

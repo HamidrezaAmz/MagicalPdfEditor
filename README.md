@@ -40,4 +40,14 @@ dependencies {
 }
 ```
 
+Step 3. Add PDFViewer into your xml
+```xml
+<ir.vasl.magicalpec.view.MagicalPdfViewer
+            android:id="@+id/magicalPdfViewer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#009688" />
+```
+
+            
 

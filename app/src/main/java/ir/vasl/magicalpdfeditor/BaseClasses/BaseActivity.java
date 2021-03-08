@@ -68,7 +68,8 @@ public class BaseActivity extends AppCompatActivity {
         if (!checkPermission(needPermissions))
             return;
 
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("application/pdf");
         try {
             startActivityForResult(intent, PublicValue.KEY_REQUEST_FILE_PICKER);

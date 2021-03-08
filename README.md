@@ -16,6 +16,7 @@ As there is not much open source easy working PDF editors and PDF wizards, I dec
 * [ ] Draw line stream over pdf 
 * [ ] Highlight text in pdf
 * [ ] Remove page from pdf file
+* [x] Convert image to pdf with scale and zoom support
 * [ ] Maybe some other features :stuck_out_tongue_winking_eye:
 
 # Usage

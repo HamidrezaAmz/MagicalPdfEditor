@@ -77,4 +77,18 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    protected void launchImagePicker() {
+        String[] needPermissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (!checkPermission(needPermissions))
+            return;
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        try {
+            startActivityForResult(intent, PublicValue.KEY_REQUEST_FILE_PICKER);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "user that file manager not working", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

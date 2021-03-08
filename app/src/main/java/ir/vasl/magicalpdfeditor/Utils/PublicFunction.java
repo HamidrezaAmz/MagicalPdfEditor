@@ -6,9 +6,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
+
+import androidx.core.content.FileProvider;
 
 import com.tapadoo.alerter.Alerter;
 
@@ -17,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import ir.vasl.magicalpdfeditor.BuildConfig;
 import ir.vasl.magicalpdfeditor.R;
 import ir.vasl.magicalpdfeditor.Utils.Interfaces.GlobalClickCallBack;
 
@@ -135,4 +139,17 @@ public class PublicFunction {
         return file.getPath();
     }
 
+    public static File getFile(Context context, String fileName) {
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            return null;
+        }
+
+        File storageDir = context.getExternalFilesDir(null);
+        return new File(storageDir, fileName);
+    }
+
+    public static Uri getFileUri(Context context, String fileName) {
+        File file = getFile(context, fileName);
+        return FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+    }
 }

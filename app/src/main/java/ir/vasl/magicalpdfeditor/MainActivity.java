@@ -51,12 +51,10 @@ public class MainActivity
     private MagicalPdfViewer magicalPdfViewer;
     private Toolbar toolbar;
     private ProgressBar progressBar;
-
     private Uri currUri = null;
     private String currFilePath = null;
     private String currFileName = null;
     private PDFView.Configurator configurator = null;
-
     private MagicalPECViewModel magicalPECViewModel;
 
     @Override
@@ -207,9 +205,7 @@ public class MainActivity
 
     public void printBookmarksTree(List<Bookmark> tree, String sep) {
         for (Bookmark b : tree) {
-
             Log.e(TAG, String.format("%s %s, p %d", sep, b.getTitle(), b.getPageIdx()));
-
             if (b.hasChildren()) {
                 printBookmarksTree(b.getChildren(), sep + "-");
             }

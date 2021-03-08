@@ -75,7 +75,7 @@ public class PdfToImageActivity
             }
         });
 
-        magicalPdfConverterViewModel.getSavePdfDestination().observe(PdfToImageActivity.this, new Observer<String>() {
+        magicalPdfConverterViewModel.getSavePdfDestinationLiveData().observe(PdfToImageActivity.this, new Observer<String>() {
             @Override
             public void onChanged(String savePdfDestination) {
                 if (savePdfDestination != null)

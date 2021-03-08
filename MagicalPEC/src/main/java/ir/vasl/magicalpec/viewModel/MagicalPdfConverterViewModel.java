@@ -16,27 +16,27 @@ public class MagicalPdfConverterViewModel extends AndroidViewModel {
     public enum PdfConverterStatusEnum {IDLE, PROCESSING, FAILED, SUCCESS}
 
     private MutableLiveData<PdfConverterStatusEnum> pdfConverterStatus;
-    private MutableLiveData<String> savePdfDestination;
+    private MutableLiveData<String> savePdfDestinationLiveData;
 
     public MagicalPdfConverterViewModel(@NonNull Application application) {
         super(application);
         this.pdfConverterStatus = new MutableLiveData<>();
-        this.savePdfDestination = new MutableLiveData<>();
+        this.savePdfDestinationLiveData = new MutableLiveData<>();
 
         this.pdfConverterStatus.postValue(PdfConverterStatusEnum.IDLE);
-        this.savePdfDestination.postValue(null);
+        this.savePdfDestinationLiveData.postValue(null);
     }
 
     public MutableLiveData<PdfConverterStatusEnum> getPdfConverterStatus() {
         return pdfConverterStatus;
     }
 
-    public MutableLiveData<String> getSavePdfDestination() {
-        return savePdfDestination;
+    public MutableLiveData<String> getSavePdfDestinationLiveData() {
+        return savePdfDestinationLiveData;
     }
 
     public void convertImageToPdf(String savePdfDestination, Uri uriImage) {
-        MagicalPdfConverterViewModel.this.pdfConverterStatus.postValue(PdfConverterStatusEnum.PROCESSING);
+        pdfConverterStatus.postValue(PdfConverterStatusEnum.PROCESSING);
 
         new Handler().post(new Runnable() {
             @Override
@@ -44,10 +44,10 @@ public class MagicalPdfConverterViewModel extends AndroidViewModel {
                 // Code here will run in UI thread
                 try {
                     MagicalPdfConverter.getInstance().convertImageIntoPDF(getApplication(), savePdfDestination, uriImage);
-                    MagicalPdfConverterViewModel.this.pdfConverterStatus.postValue(PdfConverterStatusEnum.SUCCESS);
-                    MagicalPdfConverterViewModel.this.savePdfDestination.postValue(savePdfDestination);
+                    pdfConverterStatus.postValue(PdfConverterStatusEnum.SUCCESS);
+                    savePdfDestinationLiveData.postValue(savePdfDestination);
                 } catch (MagicalException e) {
-                    MagicalPdfConverterViewModel.this.pdfConverterStatus.postValue(PdfConverterStatusEnum.FAILED);
+                    pdfConverterStatus.postValue(PdfConverterStatusEnum.FAILED);
                     e.printStackTrace();
                 }
             }

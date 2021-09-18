@@ -162,6 +162,7 @@ public class MagicalPdfCore {
             img.setAnnotation(new Annotation(0, 0, 0, 0, referenceHash));
             img.scaleAbsolute(OCGWidth, OCGHeight);
             img.setAbsolutePosition(pointF.x, pointF.y);
+            img.setTransparency(new int[]{0x00, 0x10});
             PdfImage stream = new PdfImage(img, referenceHash, null);
             stream.put(new PdfName(PublicValue.KEY_SPECIAL_ID), new PdfName(referenceHash));
             PdfIndirectObject ref = stamp.getWriter().addToBody(stream);
@@ -172,7 +173,8 @@ public class MagicalPdfCore {
 
             // prepare transparency
             PdfGState transparent = new PdfGState();
-            transparent.setAlphaIsShape(false);
+            transparent.setAlphaIsShape(true);
+            transparent.setFillOpacity(0.5F); // TADAAAAA :)))))))
 
             // get page file number count
             if (reader.getNumberOfPages() < currPage) {
@@ -194,7 +196,7 @@ public class MagicalPdfCore {
             over.setGState(transparent); // set block transparency properties
             over.addImage(img);
             over.endLayer();
-
+            
             // closing PdfStamper will generate the new PDF file
             stamp.close();
 

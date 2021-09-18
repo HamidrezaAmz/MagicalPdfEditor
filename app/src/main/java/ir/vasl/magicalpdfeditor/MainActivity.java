@@ -225,7 +225,7 @@ public class MainActivity
                 .append(UUID.randomUUID().toString())
                 .toString(); // generate reference hash
 
-        byte[] OCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v3);
+        byte[] OCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v4);
         PointF pointF = magicalPdfViewer.convertScreenPintsToPdfCoordinates(motionEvent); // convert coordinates
 
         addAnnotation(pointF, referenceHash, OCGCover);
@@ -280,7 +280,7 @@ public class MainActivity
     private void updateAnnotation(String referenceHash, LinkTapEvent event) {
 
         PointF pointF = magicalPdfViewer.convertScreenPintsToPdfCoordinates(event.getDocumentX(), event.getDocumentY()); // convert to pdf coordinates
-        byte[] newOCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v2);
+        byte[] newOCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v3);
 
         magicalPECViewModel.updateOCG(pointF,
                 currFilePath,

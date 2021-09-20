@@ -32,6 +32,11 @@
             android:indeterminate="true"
             android:visibility="gone" />
 
+        <ImageView
+            android:id="@+id/imageView_temp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
     </RelativeLayout>
 
 </LinearLayout>

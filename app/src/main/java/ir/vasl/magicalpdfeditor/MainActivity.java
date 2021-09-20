@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -57,6 +58,8 @@ public class MainActivity
     private PDFView.Configurator configurator = null;
     private MagicalPECViewModel magicalPECViewModel;
 
+    private ImageView imageViewTemp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,7 @@ public class MainActivity
         this.toolbar = findViewById(R.id.toolbar);
         this.magicalPdfViewer = findViewById(R.id.magicalPdfViewer);
         this.progressBar = findViewById(R.id.progressBar);
+        this.imageViewTemp = findViewById(R.id.imageView_temp);
 
         setSupportActionBar(toolbar);
         setTitle("PDF EDITOR");
@@ -225,7 +229,7 @@ public class MainActivity
                 .append(UUID.randomUUID().toString())
                 .toString(); // generate reference hash
 
-        byte[] OCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v4);
+        byte[] OCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v8);
         PointF pointF = magicalPdfViewer.convertScreenPintsToPdfCoordinates(motionEvent); // convert coordinates
 
         addAnnotation(pointF, referenceHash, OCGCover);
@@ -264,13 +268,11 @@ public class MainActivity
     }
 
     private void addAnnotation(PointF pointF, String referenceHash, byte[] OCGCover) {
-
         magicalPECViewModel.addOCG(pointF,
                 currUri,
                 magicalPdfViewer.getCurrentPage(),
                 referenceHash,
                 OCGCover);
-
     }
 
     private void deleteAnnotation(String referenceHash) {
@@ -280,7 +282,7 @@ public class MainActivity
     private void updateAnnotation(String referenceHash, LinkTapEvent event) {
 
         PointF pointF = magicalPdfViewer.convertScreenPintsToPdfCoordinates(event.getDocumentX(), event.getDocumentY()); // convert to pdf coordinates
-        byte[] newOCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v3);
+        byte[] newOCGCover = PublicFunction.getByteFromDrawable(MainActivity.this, R.drawable.ic_logo_v8);
 
         magicalPECViewModel.updateOCG(pointF,
                 currFilePath,
